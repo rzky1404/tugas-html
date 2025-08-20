@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rizky L — Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio singkat menampilkan proyek, skill, dan kontak."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta property="og:title" content="Portfolio — Rizky L" />
+    <meta
+      property="og:description"
+      content="Lihat proyek, skill, dan cara menghubungi saya."
+    />
+    <meta property="og:type" content="website" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💼</text></svg>"
+    />
+    <style>
+      /* ====== RESET RINGAN ====== */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+          Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial,
+          "Apple Color Emoji", "Segoe UI Emoji";
+        line-height: 1.6;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* ====== THEME ====== */
+      :root {
+        --bg: #0b1020; /* default: dark karena banyak user suka dark */
+        --fg: #eaeefb;
+        --muted: #9aa4c7;
+        --card: #111732;
+        --accent: #7c9cff;
+        --accent-2: #53e3a6;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        --radius: 18px;
+        --border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .light {
+        --bg: #f7f8fc;
+        --fg: #0b1020;
+        --muted: #5a627a;
+        --card: #ffffff;
+        --accent: #4f46e5;
+        --accent-2: #059669;
+        --shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+        --border: 1px solid rgba(2, 6, 23, 0.08);
+      }
+      body {
+        background: var(--bg);
+        color: var(--fg);
+      }
+
+      /* ====== LAYOUT ====== */
+      .container {
+        width: min(1100px, 92%);
+        margin-inline: auto;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        backdrop-filter: saturate(120%) blur(10px);
+        background: color-mix(in oklab, var(--bg) 80%, transparent);
+        border-bottom: var(--border);
+        z-index: 50;
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 0;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+      }
+      .brand .logo {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        display: grid;
+        place-items: center;
+        box-shadow: var(--shadow);
+      }
+      .brand .logo span {
+        font-weight: 800;
+      }
+      .nav-links {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+      }
+      .nav-links a {
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+      }
+      .nav-links a:hover {
+        border-color: color-mix(in oklab, var(--fg) 20%, transparent);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        border: var(--border);
+        background: color-mix(in oklab, var(--card) 94%, transparent);
+        box-shadow: var(--shadow);
+        font-weight: 600;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .btn.primary {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: white;
+        border: none;
+      }
+
+      /* ====== HERO ====== */
+      .hero {
+        padding: 64px 0 36px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 28px;
+        align-items: center;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: var(--border);
+        background: color-mix(in oklab, var(--card) 90%, transparent);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      h1 {
+        font-size: clamp(1.8rem, 2.2rem + 1.2vw, 4rem);
+        line-height: 1.15;
+        margin: 10px 0;
+      }
+      .lead {
+        font-size: 1.08rem;
+        color: var(--muted);
+      }
+      .hero-cta {
+        display: flex;
+        gap: 12px;
+        margin-top: 18px;
+        flex-wrap: wrap;
+      }
+      .avatar {
+        aspect-ratio: 1/1;
+        width: min(320px, 90%);
+        border-radius: 24px;
+        overflow: hidden;
+        border: var(--border);
+        background: var(--card);
+        box-shadow: var(--shadow);
+      }
+
+      /* ====== SECTION ====== */
+      section {
+        padding: 42px 0;
+      }
+      .section-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 18px;
+      }
+      .section-title h2 {
+        font-size: 1.6rem;
+      }
+      .grid {
+        display: grid;
+        gap: 16px;
+      }
+      .grid.cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .grid.cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      /* ====== CARD ====== */
+      .card {
+        background: var(--card);
+        border-radius: var(--radius);
+        border: var(--border);
+        padding: 18px;
+        box-shadow: var(--shadow);
+      }
+      .card h3 {
+        margin: 0 0 6px;
+      }
+      .muted {
+        color: var(--muted);
+      }
+
+      /* ====== SKILLS TAGS ====== */
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .tag {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: color-mix(in oklab, var(--card) 85%, transparent);
+        border: var(--border);
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      /* ====== PROJECTS ====== */
+      .project {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 14px;
+        align-items: center;
+      }
+      .project img {
+        border-radius: 14px;
+        border: var(--border);
+      }
+      .project .meta {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin: 8px 0;
+      }
+
+      /* ====== TIMELINE ====== */
+      .timeline {
+        border-left: 2px dashed
+          color-mix(in oklab, var(--muted) 50%, transparent);
+        padding-left: 16px;
+      }
+      .timeline .item {
+        margin: 12px 0;
+      }
+      .timeline .item .when {
+        font-weight: 700;
+        color: var(--muted);
+      }
+
+      /* ====== CONTACT ====== */
+      form {
+        display: grid;
+        gap: 10px;
+      }
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border: var(--border);
+        background: color-mix(in oklab, var(--card) 94%, transparent);
+        color: var(--fg);
+      }
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      /* ====== FOOTER ====== */
+      footer {
+        padding: 28px 0;
+        border-top: var(--border);
+        color: var(--muted);
+      }
+
+      /* ====== RESPONSIVE ====== */
+      @media (max-width: 880px) {
+        .hero-grid,
+        .project {
+          grid-template-columns: 1fr;
+        }
+        .grid.cols-3 {
+          grid-template-columns: 1fr;
+        }
+        .grid.cols-2 {
+          grid-template-columns: 1fr;
+        }
+        nav .nav-links {
+          display: none;
+        }
+        .menu-btn {
+          display: inline-flex;
+        }
+      }
+      @media (min-width: 881px) {
+        .menu-btn {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ====== NAVBAR ====== -->
+    <header>
+      <div class="container">
+        <nav>
+          <a class="brand" href="#home" aria-label="Beranda">
+            <div class="logo"><span>NK</span></div>
+            <span>Rizky L</span>
+          </a>
+          <div class="nav-links" id="navLinks">
+            <a href="#about">Tentang</a>
+            <a href="#skills">Skill</a>
+            <a href="#experience">Pengalaman</a>
+            <a href="#contact">Kontak</a>
+            <button class="btn" id="themeToggle" aria-label="Ubah tema">
+              🌓 Tema
+            </button>
+            <a class="btn" href="#" download aria-label="Unduh CV"
+              >⬇️ Unduh CV</a
+            >
+          </div>
+          <button class="btn menu-btn" id="menuBtn" aria-label="Buka menu">
+            ☰
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="home">
+      <!-- ====== HERO ====== -->
+     <section class="hero">
+<div class="container hero-grid">
+<div>
+<span class="chip">👋 Halo, saya <strong>Rizky Larendra</strong></span>
+<h1>Pelajar yang sedang berusaha menjadi Web Developer.</h1>
+<div class="hero-cta">
+<a class="btn" href="#contact">Kontak Saya</a>
+</div>
+</div>
+<div class="avatar">
+<img src="me.jpeg" alt="Foto profil" loading="lazy" />
+
+</div>
+</section>
+      <!-- ====== ABOUT ====== -->
+      <section id="about">
+        <div class="container grid cols-2">
+          <div class="card">
+            <div class="section-title"><h2>Tentang saya</h2></div>
+            <p>
+              Mudah beraptasi, Fast respon, Ganteng (Kata Mamah)
+            </p>
+          </div>
+          <div class="card">
+            <div class="section-title"><h2>Info singkat</h2></div>
+            <ul class="muted" style="margin: 0; padding-left: 18px">
+              <li>Tempat tinggal: Subang, Indonesia</li>
+              <li>Bahasa: Indonesia, English</li>
+              <li>Email: kyu@email.com</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== SKILLS ====== -->
+      <section id="skills">
+        <div class="container">
+          <div class="section-title">
+            <h2>Skill & Tools</h2>
+            <span class="muted">Teknologi yang sering dipakai</span>
+          </div>
+          <div class="card">
+            <div class="tags">
+              <span class="tag">HTML</span>
+              <span class="tag">JavaScript / TypeScript</span>
+              <span class="tag">Node.js / Express</span>
+              <span class="tag">Git / GitHub</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== PROJECTS ====== -->
+      <section id="projects">
+        <div class="container">
+          <div class="section-title">
+            <h2>My Github</h2>
+            <a
+              class="btn"
+              href="https://github.com/rzky1404"
+              target="_blank"
+              rel="noopener"
+              >GitHub →</a
+            >
+          </div>
+      <!-- ====== EXPERIENCE ====== -->
+      <section id="experience">
+        <div class="container">
+          <div class="section-title">
+            <h2>Pengalaman</h2>
+            <span class="muted">Riwayat kerja & kolaborasi</span>
+          </div>
+          <div class="card timeline">
+            <div class="item">
+              <div class="when">2025 — Sekarang · Pelajar</div>
+              <div>
+                Belum berpengalaman, Masih tahap belajar
+              </div>
+
+      <!-- ====== CONTACT ====== -->
+      <section id="contact">
+        <div class="container">
+          <div class="section-title">
+            <h2>Kontak</h2>
+            <span class="muted">Mari diskusi ide atau kerja sama</span>
+          </div>
+          <div class="card">
+            <form id="contactForm">
+              <div class="grid cols-2">
+                <div>
+                  <label for="name" class="muted">Nama</label>
+                  <input
+                    id="name"
+                    name="name"
+                    placeholder="Nama kamu"
+                    required
+                  />
+                </div>
+                <div>
+                  <label for="email" class="muted">Email</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="email@contoh.com"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label for="message" class="muted">Pesan</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Tulis pesanmu di sini..."
+                  required
+                ></textarea>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  gap: 10px;
+                  align-items: center;
+                  flex-wrap: wrap;
+                "
+              >
+                <button class="btn primary" type="submit">Kirim Pesan</button>
+                <span
+                  class="muted"
+                  id="formStatus"
+                  role="status"
+                  aria-live="polite"
+                ></span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div
+        class="container"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 12px;
+          flex-wrap: wrap;
+        "
+      >
+        <small>© <span id="year"></span> Nama Kamu. All rights reserved.</small>
+        <div style="display: flex; gap: 12px">
+          <a
+            class="btn"
+            href="https://linkedin.com/in/username"
+            target="_blank"
+            rel="noopener"
+            aria-label="LinkedIn"
+            >in</a
+          >
+          <a
+            class="btn"
+            href="https://twitter.com/username"
+            target="_blank"
+            rel="noopener"
+            aria-label="Twitter / X"
+            >𝕏</a
+          >
+          <a class="btn" href="mailto:kamu@email.com" aria-label="Email">✉️</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // ====== Tahun otomatis
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // ====== Toggle Tema (dark <-> light)
+      const themeToggle = document.getElementById("themeToggle");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      const saved = localStorage.getItem("theme");
+      if (saved === "light" || (!saved && !prefersDark))
+        document.body.classList.add("light");
+      themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("light");
+        localStorage.setItem(
+          "theme",
+          document.body.classList.contains("light") ? "light" : "dark"
+        );
+      });
+
+      // ====== Menu mobile
+      const menuBtn = document.getElementById("menuBtn");
+      const navLinks = document.getElementById("navLinks");
+      menuBtn?.addEventListener("click", () => {
+        const showing = navLinks.style.display === "flex";
+        navLinks.style.display = showing ? "none" : "flex";
+        navLinks.style.flexDirection = "column";
+        navLinks.style.gap = "12px";
+        navLinks.style.alignItems = "flex-start";
+        navLinks.style.marginTop = "10px";
+      });
+
+      // ====== Form (mailto fallback)
+      const form = document.getElementById("contactForm");
+      const statusEl = document.getElementById("formStatus");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        const name = encodeURIComponent(data.get("name"));
+        const email = encodeURIComponent(data.get("email"));
+        const message = encodeURIComponent(data.get("message"));
+        window.location.href = `mailto:kamu@email.com?subject=Kontak%20dari%20${name}&body=Email:%20${email}%0D%0A%0D%0A${message}`;
+        statusEl.textContent = "Membuka aplikasi email…";
+        form.reset();
+      });
+    </script>
+  </body>
+</html>
